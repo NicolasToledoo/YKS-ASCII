@@ -374,15 +374,6 @@
       text-shadow: none;
     }
 
-    /* Color swatches */
-    .color-swatch {
-      transition: all 0.2s ease;
-    }
-    .color-swatch.active {
-      transform: scale(1.15);
-      box-shadow: 0 0 0 3px var(--glow-cyan), 0 4px 12px rgba(0,0,0,0.3);
-    }
-
     /* Toggle switch — chrome Y2K style */
     .toggle-switch {
       position: relative;
@@ -615,12 +606,12 @@
             <div id="colorControlGroup" class="space-y-base hidden">
                 <span class="text-xs font-mono text-muted tracking-wider">PALETA DE TINTA</span>
                 <div class="flex gap-stack-sm flex-wrap">
-                    <button class="color-swatch w-10 h-10 rounded-full border-4 border-near-white/40 shadow-lg hover:scale-110 transition-transform active" data-color="#C0C0C0" data-ansi="37" style="background: linear-gradient(135deg, #e0e0e0, #C0C0C0);"></button>
-                    <button class="color-swatch w-10 h-10 rounded-full border-4 border-near-white/40 shadow-lg hover:scale-110 transition-transform" data-color="#00FF00" data-ansi="32" style="background: linear-gradient(135deg, #4dff4d, #00CC00);"></button>
-                    <button class="color-swatch w-10 h-10 rounded-full border-4 border-near-white/40 shadow-lg hover:scale-110 transition-transform" data-color="#0088FF" data-ansi="34" style="background: linear-gradient(135deg, #4da6ff, #0066CC);"></button>
-                    <button class="color-swatch w-10 h-10 rounded-full border-4 border-near-white/40 shadow-lg hover:scale-110 transition-transform" data-color="#FF0000" data-ansi="31" style="background: linear-gradient(135deg, #ff4d4d, #CC0000);"></button>
-                    <button class="color-swatch w-10 h-10 rounded-full border-4 border-near-white/40 shadow-lg hover:scale-110 transition-transform" data-color="#FFD700" data-ansi="33" style="background: linear-gradient(135deg, #ffe44d, #CC9900);"></button>
-                    <input type="color" id="colorPicker" value="#C0C0C0" class="w-full h-10 rounded-xl border-4 border-near-white/40 shadow-lg cursor-pointer p-0 overflow-hidden">
+                    <button class="color-swatch w-10 h-10 rounded-full active" data-color="#C0C0C0" data-ansi="37" style="background: linear-gradient(135deg, #e0e0e0, #C0C0C0);"></button>
+                    <button class="color-swatch w-10 h-10 rounded-full" data-color="#00FF00" data-ansi="32" style="background: linear-gradient(135deg, #4dff4d, #00CC00);"></button>
+                    <button class="color-swatch w-10 h-10 rounded-full" data-color="#0088FF" data-ansi="34" style="background: linear-gradient(135deg, #4da6ff, #0066CC);"></button>
+                    <button class="color-swatch w-10 h-10 rounded-full" data-color="#FF0000" data-ansi="31" style="background: linear-gradient(135deg, #ff4d4d, #CC0000);"></button>
+                    <button class="color-swatch w-10 h-10 rounded-full" data-color="#FFD700" data-ansi="33" style="background: linear-gradient(135deg, #ffe44d, #CC9900);"></button>
+                    <input type="color" id="colorPicker" value="#C0C0C0" class="h-10 rounded-full cursor-pointer p-0 overflow-hidden">
                 </div>
             </div>
 
