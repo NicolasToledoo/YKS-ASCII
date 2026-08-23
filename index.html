@@ -1,0 +1,1750 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>YKS ASCII - Início</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    "electric-blue": "#2e63ff",
+                    "magenta": "#ff2e88",
+                    "cyan": "#25e0ff",
+                    "lime": "#c6ff3d",
+                    "deep-space": "#07080d",
+                    "near-white": "#eef1f8",
+                    "muted": "#8b93a8",
+                    "chrome-silver": "#c0c0c0",
+                    "secondary": "#00FFF0",
+                    "primary": "#2e63ff",
+                    "terminal-bg": "#0a0c0e",
+                    "terminal-text": "#92fa84",
+                    "glass-surface": "rgba(255, 255, 255, 0.35)",
+                    "glass-border": "rgba(209, 213, 219, 0.15)"
+                },
+                borderRadius: {
+                    DEFAULT: "0.25rem",
+                    lg: "0.5rem",
+                    xl: "0.75rem",
+                    full: "9999px"
+                },
+                spacing: {
+                    "stack-lg": "48px",
+                    "container-padding-mobile": "20px",
+                    "base": "8px",
+                    "stack-md": "24px",
+                    "container-padding-desktop": "40px",
+                    "stack-sm": "12px",
+                    "gutter": "24px"
+                },
+                fontFamily: {
+                    "headline": ["Space Grotesk", "sans-serif"],
+                    "wordmark": ["Space Grotesk", "sans-serif"],
+                    "body": ["Inter", "sans-serif"],
+                    "mono": ["JetBrains Mono", "monospace"],
+                    "terminal-text": ["JetBrains Mono", "monospace"]
+                },
+                fontSize: {
+                    "headline-lg": ["40px", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700" }],
+                    "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "600" }],
+                    "headline-lg-mobile": ["32px", { lineHeight: "1.1", fontWeight: "700" }],
+                    "eyebrow": ["12px", { lineHeight: "1.0", letterSpacing: "0.16em", fontWeight: "600" }],
+                    "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }]
+                },
+                dropShadow: {
+                    'chrome': '0 1px 0 rgba(255,255,255,0.6), 0 2px 4px rgba(0,0,0,0.6)'
+                }
+            }
+        }
+    }
+    </script>
+    <style>
+    /* ===== Y2K / Liquid-Chrome Design System ===== */
+    :root {
+      --canvas: #07080d;
+      --glow-blue: #2e63ff;
+      --glow-magenta: #ff2e88;
+      --glow-cyan: #25e0ff;
+      --lime: #c6ff3d;
+      --near-white: #eef1f8;
+      --muted: #8b93a8;
+      --chrome-1: #ffffff;
+      --chrome-2: #eaeefc;
+      --chrome-3: #b7c0d8;
+      --chrome-4: #818ca9;
+      --chrome-5: #5f6a89;
+      --glass-fill: rgba(7, 8, 13, 0.65);
+      --glass-border: rgba(209, 213, 219, 0.15);
+      --sparkle-size: 4px;
+    }
+
+    body {
+      background: var(--canvas);
+      color: var(--near-white);
+      font-family: "Inter", sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -10;
+      background:
+        radial-gradient(120% 120% at 50% 0%, rgba(46,99,255,0.22) 0%, transparent 35%),
+        radial-gradient(100% 100% at 20% 100%, rgba(255,46,136,0.15) 0%, transparent 40%),
+        radial-gradient(100% 100% at 85% 85%, rgba(37,224,255,0.18) 0%, transparent 38%);
+      filter: blur(120px);
+      pointer-events: none;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -9;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.06'/%3E%3C/svg%3E");
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    #glcanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Chrome text: silver gradient fill via background-clip + bevel */
+    .chrome-text {
+      background: linear-gradient(125deg,
+        var(--chrome-1) 0%,
+        var(--chrome-2) 25%,
+        var(--chrome-3) 50%,
+        var(--chrome-4) 75%,
+        var(--chrome-5) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow:
+        0 1px 0 rgba(255,255,255,0.55),
+        0 2px 4px rgba(0,0,0,0.55);
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,0.5));
+    }
+
+    /* Eyebrow: JetBrains Mono, uppercase, electric accent */
+    .eyebrow {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--glow-magenta);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .eyebrow::before,
+    .eyebrow::after {
+      content: "";
+      width: 0.45rem;
+      height: 0.45rem;
+      border-radius: 50%;
+      background: var(--glow-magenta);
+      box-shadow: 0 0 6px var(--glow-magenta);
+    }
+
+    /* Chrome card: brushed-metal border + dark-glass fill */
+    .chrome-card {
+      background: var(--glass-fill);
+      border: 1px solid var(--glass-border);
+      border-top: 1px solid rgba(255,255,255,0.25);
+      border-image: linear-gradient(135deg,
+        rgba(255,255,255,0.08) 0%,
+        rgba(255,255,255,0.12) 50%,
+        rgba(255,255,255,0.08) 100%);
+      border-image-slice: 1;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .chrome-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      pointer-events: none;
+    }
+
+    .chrome-card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(46,99,255,0.3), rgba(255,46,136,0.3), rgba(37,224,255,0.3));
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    /* Aero pill — primary: magenta-to-blue gradient */
+    .aero-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.55rem 1.2rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(255,255,255,0.35);
+      font-family: "Inter", sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--near-white);
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+      overflow: hidden;
+      text-decoration: none;
+    }
+
+    .aero-btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.7), transparent);
+      pointer-events: none;
+    }
+
+    .aero-btn-primary {
+      background: linear-gradient(135deg, var(--glow-magenta), var(--glow-blue));
+      box-shadow:
+        0 0 12px rgba(255,46,136,0.45),
+        0 4px 16px rgba(46,99,255,0.35);
+    }
+
+    .aero-btn-primary:hover:not(:disabled) {
+      box-shadow:
+        0 0 20px rgba(255,46,136,0.6),
+        0 6px 22px rgba(46,99,255,0.5);
+      transform: translateY(-2px);
+    }
+
+    .aero-btn-secondary {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.2);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.15),
+        0 2px 10px rgba(0,0,0,0.3);
+    }
+
+    .aero-btn-secondary:hover:not(:disabled) {
+      background: rgba(255,255,255,0.13);
+      border-color: rgba(255,255,255,0.3);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.25),
+        0 0 14px rgba(255,46,136,0.25);
+    }
+
+    .aero-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    /* Sparkle: tiny electric specks */
+    .sparkle {
+      position: absolute;
+      width: var(--sparkle-size);
+      height: var(--sparkle-size);
+      border-radius: 50%;
+      background: var(--glow-magenta);
+      box-shadow: 0 0 4px var(--glow-magenta);
+      animation: pulse-glow 2s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0; transform: scale(0.7); }
+      50% { opacity: 0.8; transform: scale(1.2); }
+    }
+
+    /* Upload zone — chrome card with glow */
+    .upload-zone {
+      background: var(--glass-fill);
+      border: 2px dashed var(--glass-border);
+      transition: all 0.3s ease;
+    }
+
+    .upload-zone:hover,
+    .upload-zone.dragover {
+      border-color: var(--glow-cyan);
+      box-shadow: 0 0 18px rgba(37,224,255,0.35);
+      transform: scale(1.01);
+    }
+
+    /* Sliders — gel-style with electric accents */
+    .gel-slider-track {
+      background: linear-gradient(90deg,
+        rgba(46,99,255,0.15),
+        rgba(255,46,136,0.2),
+        rgba(37,224,255,0.2));
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.25);
+      height: 8px;
+      border-radius: 999px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .gel-slider-thumb {
+      width: 20px;
+      height: 20px;
+      background: radial-gradient(circle at 30% 30%, #fff, var(--glow-blue));
+      border: 2px solid rgba(255,255,255,0.8);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3), inset 0 -2px 4px rgba(0,0,0,0.15);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+    }
+
+    .gel-slider-thumb:hover {
+      transform: translate(-50%, -50%) scale(1.2);
+    }
+
+    /* ASCII output — terminal green on deep */
+    .ascii-output {
+      background: #0a0c0e;
+      color: #92fa84;
+      font-family: "JetBrains Mono", monospace;
+      line-height: 1;
+      white-space: pre;
+      text-align: left;
+      text-shadow: 0 0 6px rgba(146,250,132,0.4);
+      min-height: 300px;
+      overflow: auto;
+    }
+
+    .ascii-output:empty::before {
+      content: 'Aguardando processamento da imagem...\nFaça o upload para visualizar o resultado.';
+      white-space: pre-wrap;
+      color: rgba(238,241,248,0.35);
+      text-shadow: none;
+    }
+
+    /* Text-mode ASCII output — separate element so the image-mode responsive
+       font-size logic never governs it; uses real left-aligned monospace. */
+    .text-output {
+      background: #0a0c0e;
+      color: #92fa84;
+      font-family: "JetBrains Mono", monospace;
+      line-height: 1.1;
+      white-space: pre;
+      text-align: left;
+      text-shadow: 0 0 6px rgba(146,250,132,0.4);
+      min-height: 300px;
+      overflow: auto;
+    }
+
+    .text-output:empty::before {
+      content: 'Digite um texto acima para gerar a arte ASCII.';
+      white-space: pre-wrap;
+      color: rgba(238,241,248,0.35);
+      text-shadow: none;
+    }
+
+    /* Color swatches */
+    .color-swatch {
+      transition: all 0.2s ease;
+    }
+    .color-swatch.active {
+      transform: scale(1.15);
+      box-shadow: 0 0 0 3px var(--glow-cyan), 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    /* Toggle switch — chrome Y2K style */
+    .toggle-switch {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+    .toggle-slider {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+      background: rgba(46,99,255,0.25);
+      border-radius: 9999px;
+      border: 1px solid rgba(255,255,255,0.5);
+      transition: 0.3s;
+    }
+    .toggle-slider::before {
+      content: "";
+      position: absolute;
+      height: 16px;
+      width: 16px;
+      left: 4px;
+      bottom: 4px;
+      background: var(--near-white);
+      border-radius: 50%;
+      transition: 0.3s;
+    }
+    input:checked + .toggle-slider {
+      background: linear-gradient(135deg, var(--glow-magenta), var(--glow-blue));
+    }
+    input:checked + .toggle-slider::before {
+      transform: translateX(20px);
+    }
+
+    /* Progress bar — electric */
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--glow-cyan), var(--glow-magenta));
+      border-radius: 999px;
+      transition: width 0.2s;
+    }
+
+    /* Custom charset input */
+    .custom-charset-input {
+      width: 100%;
+      background: rgba(46,99,255,0.08);
+      border: 1px solid rgba(46,99,255,0.25);
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      color: var(--glow-blue);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .custom-charset-input:focus {
+      border-color: var(--glow-magenta);
+    }
+
+    /* Scrollbar — chrome */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--glow-blue), var(--glow-magenta));
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(180deg, var(--glow-magenta), var(--glow-blue));
+    }
+
+    .hidden { display: none !important; }
+    </style>
+</head>
+<body class="font-body text-near-white pt-[80px]">
+<canvas id="glcanvas" width="1280" height="720"></canvas>
+
+<main class="max-w-7xl mx-auto px-container-padding-desktop py-stack-lg min-h-screen flex flex-col gap-stack-md relative z-10">
+    <div class="flex justify-center" id="modeToggle">
+        <div class="inline-flex rounded-full border border-glass-border overflow-hidden backdrop-blur-md bg-glass-fill">
+            <button class="aero-btn aero-btn-primary text-sm py-1.5 px-5 rounded-none border-0" data-mode="image" id="modeImageBtn">
+                <span class="material-symbols-outlined text-sm align-middle">image</span> Imagem
+            </button>
+            <button class="aero-btn aero-btn-secondary text-sm py-1.5 px-5 rounded-none border-0" data-mode="text" id="modeTextBtn">
+                <span class="material-symbols-outlined text-sm align-middle">text_fields</span> Texto
+            </button>
+        </div>
+    </div>
+
+    <section class="chrome-card rounded-3xl overflow-hidden min-h-[400px] flex flex-col items-center gap-stack-lg p-stack-lg relative" id="imageHero">
+        <div class="text-center max-w-2xl">
+            <h1 class="font-headline text-4xl sm:text-5xl md:text-6xl font-bold chrome-text leading-tight mb-6">
+                Transforme Imagens em Arte ASCII
+            </h1>
+            <p class="text-muted font-body max-w-xl mx-auto">
+                Converta suas fotografias digitais em composições tipográficas complexas com nossa engine de processamento de alta fidelidade.
+            </p>
+        </div>
+
+        <div class="flex justify-center w-full">
+            <div class="upload-zone w-full max-w-lg aspect-video rounded-2xl flex flex-col items-center justify-center cursor-pointer group p-stack-md relative" id="uploadZone">
+                <div class="w-20 h-20 rounded-full bg-chrome-card flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform mb-4 border border-glass-border">
+                    <span class="material-symbols-outlined text-4xl text-electric-blue">cloud_upload</span>
+                </div>
+                <span class="font-bold text-electric-blue text-headline-md">Solte sua imagem aqui</span>
+                <span class="text-muted text-xs font-mono tracking-wider mb-2">JPG, PNG OU WEBP ATÉ 10MB</span>
+                <input type="file" id="fileInput" accept="image/*" class="hidden">
+            </div>
+        </div>
+
+        <div id="imagePreview" class="hidden w-full max-w-sm">
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-xs font-mono text-electric-blue">Pré-visualização</span>
+                <button id="removeImage" class="aero-btn aero-btn-secondary text-xs py-1 px-3">Remover</button>
+            </div>
+            <img id="previewImg" class="w-full rounded-2xl shadow-lg border border-glass-border" alt="Preview" style="max-height: 200px; object-fit: contain;">
+        </div>
+    </section>
+
+    <aside class="chrome-card p-stack-md rounded-3xl flex flex-col gap-stack-md" id="imageControls">
+        <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-electric-blue">tune</span>
+            <h2 class="font-headline text-headline-md chrome-text">Ajustes</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-stack-md">
+            <div class="space-y-base">
+                <div class="flex justify-between text-xs font-mono text-muted tracking-wider">
+                    <span>LARGURA</span>
+                    <span id="width-val" class="text-electric-blue font-bold">100</span>
+                </div>
+                <div class="gel-slider-track" id="width-track">
+                    <div class="gel-slider-thumb" id="width-thumb"></div>
+                </div>
+            </div>
+
+            <div class="space-y-base">
+                <div class="flex justify-between text-xs font-mono text-muted tracking-wider">
+                    <span>CONTRASTE</span>
+                    <span id="contrast-val" class="text-electric-blue font-bold">1.0</span>
+                </div>
+                <div class="gel-slider-track" id="contrast-track">
+                    <div class="gel-slider-thumb" id="contrast-thumb"></div>
+                </div>
+            </div>
+
+            <div class="space-y-base">
+                <div class="flex justify-between text-xs font-mono text-muted tracking-wider">
+                    <span>CONJUNTO</span>
+                </div>
+                <select id="charsetSelect" class="w-full bg-terminal-bg border border-glass-border rounded-xl px-3 py-2 text-sm font-mono text-electric-blue focus:outline-none focus:border-glow-cyan">
+                    <option value="standard">Padrão</option>
+                    <option value="detailed">Detalhado</option>
+                    <option value="extended">Estendido (70 chars)</option>
+                    <option value="blocks">Blocos</option>
+                    <option value="braille">Braille</option>
+                    <option value="binary">Binário</option>
+                    <option value="minimal">Mínimo</option>
+                    <option value="custom">Personalizado</option>
+                </select>
+                <div id="customCharsetGroup" class="hidden">
+                    <input type="text" id="customCharsetInputEl" class="custom-charset-input" placeholder="Digite os caracteres (ex: @%#*. )" maxlength="100">
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-stack-md">
+            <div class="space-y-base">
+                <div class="flex justify-between text-xs font-mono text-muted tracking-wider">
+                    <span>BRILHO</span>
+                    <span id="brightness-val" class="text-electric-blue font-bold">0</span>
+                </div>
+                <div class="gel-slider-track" id="brightness-track">
+                    <div class="gel-slider-thumb" id="brightness-thumb"></div>
+                </div>
+            </div>
+
+            <div class="space-y-base">
+                <div class="flex justify-between text-xs font-mono text-muted tracking-wider">
+                    <span>SATURAÇÃO</span>
+                    <span id="saturation-val" class="text-electric-blue font-bold">100%</span>
+                </div>
+                <div class="gel-slider-track" id="saturation-track">
+                    <div class="gel-slider-thumb" id="saturation-thumb"></div>
+                </div>
+            </div>
+
+            <div class="space-y-base">
+                <div class="flex justify-between text-xs font-mono text-muted tracking-wider">
+                    <span>GAMA</span>
+                    <span id="gamma-val" class="text-electric-blue font-bold">1.0</span>
+                </div>
+                <div class="gel-slider-track" id="gamma-track">
+                    <div class="gel-slider-thumb" id="gamma-thumb"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-stack-md">
+            <div class="space-y-base">
+                <div class="flex justify-between text-xs font-mono text-muted tracking-wider">
+                    <span>AGUDEZA</span>
+                    <span id="sharpen-val" class="text-electric-blue font-bold">0</span>
+                </div>
+                <div class="gel-slider-track" id="sharpen-track">
+                    <div class="gel-slider-thumb" id="sharpen-thumb"></div>
+                </div>
+            </div>
+
+            <div class="flex items-end">
+                <label class="toggle-switch flex items-center gap-2">
+                    <input type="checkbox" id="invertToggleInput">
+                    <span class="toggle-slider"></span>
+                    <span class="text-sm font-mono text-muted tracking-wider">INVERTER</span>
+                </label>
+            </div>
+
+            <div class="flex items-end">
+                <label class="toggle-switch flex items-center gap-2">
+                    <input type="checkbox" id="edgeToggleInput">
+                    <span class="toggle-slider"></span>
+                    <span class="text-sm font-mono text-muted tracking-wider">DETECÇÃO DE BORDA</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-stack-md pt-4">
+            <div id="colorControlGroup" class="space-y-base hidden">
+                <span class="text-xs font-mono text-muted tracking-wider">PALETA DE TINTA</span>
+                <div class="flex gap-stack-sm flex-wrap">
+                    <button class="color-swatch w-10 h-10 rounded-full border-4 border-near-white/40 shadow-lg hover:scale-110 transition-transform active" data-color="#C0C0C0" data-ansi="37" style="background: linear-gradient(135deg, #e0e0e0, #C0C0C0);"></button>
+                    <button class="color-swatch w-10 h-10 rounded-full border-4 border-near-white/40 shadow-lg hover:scale-110 transition-transform" data-color="#00FF00" data-ansi="32" style="background: linear-gradient(135deg, #4dff4d, #00CC00);"></button>
+                    <button class="color-swatch w-10 h-10 rounded-full border-4 border-near-white/40 shadow-lg hover:scale-110 transition-transform" data-color="#0088FF" data-ansi="34" style="background: linear-gradient(135deg, #4da6ff, #0066CC);"></button>
+                    <button class="color-swatch w-10 h-10 rounded-full border-4 border-near-white/40 shadow-lg hover:scale-110 transition-transform" data-color="#FF0000" data-ansi="31" style="background: linear-gradient(135deg, #ff4d4d, #CC0000);"></button>
+                    <button class="color-swatch w-10 h-10 rounded-full border-4 border-near-white/40 shadow-lg hover:scale-110 transition-transform" data-color="#FFD700" data-ansi="33" style="background: linear-gradient(135deg, #ffe44d, #CC9900);"></button>
+                    <input type="color" id="colorPicker" value="#C0C0C0" class="w-full h-10 rounded-xl border-4 border-near-white/40 shadow-lg cursor-pointer p-0 overflow-hidden">
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <span class="font-mono text-xs text-muted tracking-wider">CORES ANSI</span>
+                <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="ansiToggleInput" class="sr-only peer">
+                    <div class="w-11 h-6 bg-glass-surface rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-near-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gradient-to-r peer-checked:from-magenta peer-checked:to-electric-blue"></div>
+                </label>
+            </div>
+        </div>
+    </aside>
+
+    <section class="grid grid-cols-1 gap-stack-md" id="imageResult">
+        <div class="chrome-card p-stack-sm rounded-3xl h-full min-h-[350px] flex flex-col gap-stack-sm relative">
+            <div class="flex items-center justify-between px-2">
+                <span class="font-mono text-xs text-muted tracking-wider flex items-center gap-2"><span class="material-symbols-outlined text-electric-blue text-sm">description</span> RESULTADO ASCII</span>
+                <div class="flex gap-2 relative" id="actionButtons">
+                    <button class="aero-btn aero-btn-primary text-xs py-1.5 px-3" id="copyBtn" disabled>
+                        <span class="material-symbols-outlined text-xs">content_copy</span> Copiar
+                    </button>
+                    <button class="aero-btn aero-btn-primary text-xs py-1.5 px-3" id="downloadBtn" disabled>
+                        <span class="material-symbols-outlined text-xs">download</span> TXT
+                    </button>
+                    <button class="aero-btn aero-btn-primary text-xs py-1.5 px-3" id="downloadPngBtn" disabled>
+                        <span class="material-symbols-outlined text-xs">image</span> PNG
+                    </button>
+                    <button class="aero-btn aero-btn-primary text-xs py-1.5 px-3" id="copyImgBtn" disabled>
+                        <span class="material-symbols-outlined text-xs">image</span> Copiar Img
+                    </button>
+                </div>
+            </div>
+            <div class="flex-1 bg-terminal-bg rounded-2xl border border-glass-border p-4 overflow-auto ascii-output relative" id="asciiOutput">
+            </div>
+            <div id="loading" class="hidden absolute inset-0 bg-canvas/80 backdrop-blur-xl border-2 border-glass-border rounded-3xl flex flex-col items-center justify-center gap-3 z-10">
+                <div class="w-12 h-12 border-4 border-electric-blue/30 border-t-electric-blue rounded-full animate-spin"></div>
+                <span class="font-mono text-sm text-electric-blue" id="loadingText">Processando pixels...</span>
+                <div class="w-48 h-1.5 bg-glass-border rounded-full overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-cyan to-magenta rounded-full transition-all duration-200" id="progressFill" style="width: 0%;"></div>
+                </div>
+                <span class="text-xs font-mono text-muted" id="progressPercent">0%</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="textSection" class="hidden grid grid-cols-1 gap-stack-md">
+        <div class="chrome-card p-stack-md rounded-3xl flex flex-col gap-stack-md">
+            <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-electric-blue">text_fields</span>
+                <h2 class="font-headline text-headline-md chrome-text">Texto &rarr; ASCII</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+                <div class="space-y-base">
+                    <label class="text-xs font-mono text-muted tracking-wider">TEXTO</label>
+                    <input id="textInput" type="text" maxlength="40" placeholder="Digite aqui (ex: YKS)" class="w-full bg-terminal-bg border border-glass-border rounded-xl px-3 py-2 text-sm font-mono text-near-white focus:outline-none focus:border-glow-cyan">
+                </div>
+                <div class="space-y-base">
+                    <label class="text-xs font-mono text-muted tracking-wider">FONTE</label>
+                    <select id="fontSelect" class="w-full bg-terminal-bg border border-glass-border rounded-xl px-3 py-2 text-sm font-mono text-electric-blue focus:outline-none focus:border-glow-cyan">
+                        <option>carregando fontes...</option>
+                    </select>
+                </div>
+            </div>
+            <p class="text-xs font-mono text-muted tracking-wider">Dica: use "Copiar Img" / "PNG" para compartilhar em apps que colapsam espaços (WhatsApp, Discord, Word). TXT/Copiar funcionam em editores monospace.</p>
+        </div>
+
+        <div class="chrome-card p-stack-sm rounded-3xl min-h-[350px] flex flex-col gap-stack-sm relative">
+            <div class="flex items-center justify-between px-2">
+                <span class="font-mono text-xs text-muted tracking-wider flex items-center gap-2"><span class="material-symbols-outlined text-electric-blue text-sm">description</span> PREVIEW</span>
+                <div class="flex gap-2 relative" id="textActionButtons">
+                    <button class="aero-btn aero-btn-primary text-xs py-1.5 px-3" id="textCopyBtn" disabled>
+                        <span class="material-symbols-outlined text-xs">content_copy</span> Copiar
+                    </button>
+                    <button class="aero-btn aero-btn-primary text-xs py-1.5 px-3" id="textDownloadTxtBtn" disabled>
+                        <span class="material-symbols-outlined text-xs">download</span> TXT
+                    </button>
+                    <button class="aero-btn aero-btn-primary text-xs py-1.5 px-3" id="textDownloadPngBtn" disabled>
+                        <span class="material-symbols-outlined text-xs">image</span> PNG
+                    </button>
+                    <button class="aero-btn aero-btn-primary text-xs py-1.5 px-3" id="textCopyImgBtn" disabled>
+                        <span class="material-symbols-outlined text-xs">image</span> Copiar Img
+                    </button>
+                </div>
+            </div>
+            <div class="flex-1 bg-terminal-bg rounded-2xl border border-glass-border p-4 overflow-auto text-output relative" id="textOutput">
+            </div>
+            <div id="textLoading" class="hidden absolute inset-0 bg-canvas/80 backdrop-blur-xl border-2 border-glass-border rounded-3xl flex flex-col items-center justify-center gap-3 z-10">
+                <div class="w-12 h-12 border-4 border-electric-blue/30 border-t-electric-blue rounded-full animate-spin"></div>
+                <span class="font-mono text-sm text-electric-blue">carregando fontes...</span>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="chrome-card w-full py-stack-md px-container-padding-desktop flex flex-col md:flex-row justify-between items-center gap-stack-sm relative z-10 mt-stack-md rounded-none">
+    <div class="font-mono text-xs text-muted tracking-wider">YKS ASCII</div>
+    <p class="font-mono text-xs chrome-text">© 2026 YKS ASCII</p>
+</footer>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+precision highp float;
+varying vec2 v_texCoord;
+uniform float u_time;
+uniform vec2 u_resolution;
+
+float hash(vec2 p) {
+    p = fract(p * vec2(123.34, 456.21));
+    p += dot(p, p + 45.32);
+    return fract(p.x * p.y);
+}
+
+float noise(vec2 p) {
+    vec2 i = floor(p);
+    vec2 f = fract(p);
+    f = f * f * (3.0 - 2.0 * f);
+    float a = hash(i);
+    float b = hash(i + vec2(1.0, 0.0));
+    float c = hash(i + vec2(0.0, 1.0));
+    float d = hash(i + vec2(1.0, 1.0));
+    return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
+}
+
+void main() {
+    vec2 uv = v_texCoord;
+    vec2 p = (uv - 0.5) * 2.0;
+    p.x *= u_resolution.x / u_resolution.y;
+
+    vec3 darkCanvas = vec3(0.027, 0.031, 0.051);
+
+    vec3 glowBlue = vec3(0.180, 0.392, 1.0);
+    vec3 glowMagenta = vec3(1.0, 0.180, 0.533);
+    vec3 glowCyan = vec3(0.145, 0.878, 1.0);
+
+    vec3 glow = vec3(0.0);
+    glow += 0.18 * glowBlue * smoothstep(0.8, 0.0, length(uv - vec2(0.3, 0.7)));
+    glow += 0.12 * glowMagenta * smoothstep(0.9, 0.0, length(uv - vec2(0.75, 0.25)));
+    glow += 0.15 * glowCyan * smoothstep(0.7, 0.0, length(uv - vec2(0.5, 0.5)));
+    glow = pow(glow, vec3(1.3));
+
+    float fbm = 0.0;
+    float amp = 0.5;
+    float freq = 3.0;
+    for (int i = 0; i < 3; i++) {
+        fbm += amp * noise(p * freq + u_time * 0.02);
+        amp *= 0.5;
+        freq *= 2.0;
+    }
+
+    vec3 chromic = vec3(0.0);
+    for (float i = 1.0; i < 30.0; i++) {
+        float h = hash(vec2(i, 123.45));
+        float speed = 0.05 + h * 0.08;
+        float xOffset = sin(u_time * speed + h * 6.28) * 0.15;
+        vec2 pos = vec2(-1.0 + 2.0 * h + xOffset, -1.5 + mod(u_time * speed + h, 3.0));
+        float dist = length(p - pos);
+        float radius = 0.02 + 0.05 * h;
+        float spark = smoothstep(radius, 0.0, dist) * 0.12;
+        vec3 sparkColor = mix(glowMagenta, glowCyan, h);
+        chromic += spark * sparkColor;
+    }
+
+    float grain = fbm * 0.04;
+    vec3 color = darkCanvas + glow + chromic + grain;
+
+    gl_FragColor = vec4(color, 1.0);
+}
+</script>
+
+<script src="vendor/figlet-bundle.js"></script>
+<script>
+const canvas = document.getElementById('glcanvas');
+const gl = canvas.getContext('webgl');
+if (gl) {
+    const vsSource = `
+      attribute vec4 aVertexPosition;
+      varying vec2 v_texCoord;
+      void main() {
+        gl_Position = aVertexPosition;
+        v_texCoord = aVertexPosition.xy * 0.5 + 0.5;
+      }
+    `;
+    const fsSource = document.getElementById('fragment-shader').textContent;
+
+    function createShader(gl, type, source) {
+        const shader = gl.createShader(type);
+        gl.shaderSource(shader, source);
+        gl.compileShader(shader);
+        return shader;
+    }
+
+    const vertexShader = createShader(gl, gl.VERTEX_SHADER, vsSource);
+    const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fsSource);
+
+    const program = gl.createProgram();
+    gl.attachShader(program, vertexShader);
+    gl.attachShader(program, fragmentShader);
+    gl.linkProgram(program);
+    gl.useProgram(program);
+
+    const positionBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+    const positions = [-1.0, 1.0, 1.0, 1.0, -1.0, -1.0, 1.0, -1.0];
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
+
+    const positionLocation = gl.getAttribLocation(program, "aVertexPosition");
+    gl.enableVertexAttribArray(positionLocation);
+    gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+
+    const timeLocation = gl.getUniformLocation(program, "u_time");
+    const resolutionLocation = gl.getUniformLocation(program, "u_resolution");
+
+    function render(time) {
+        time *= 0.001;
+        if (canvas.width !== window.innerWidth || canvas.height !== window.innerHeight) {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            gl.viewport(0, 0, canvas.width, canvas.height);
+        }
+        gl.uniform1f(timeLocation, time);
+        gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+        requestAnimationFrame(render);
+    }
+    requestAnimationFrame(render);
+}
+
+function setupSlider(thumbId, valId, trackId, min, max, initial, unit, step, onChange) {
+    const thumb = document.getElementById(thumbId);
+    const valDisplay = document.getElementById(valId);
+    const track = document.getElementById(trackId);
+    let isDragging = false;
+
+    function updateValue(percent) {
+        let value;
+        if (step) {
+            value = min + percent * (max - min);
+            value = Math.round(value / step) * step;
+            valDisplay.innerText = value.toFixed(1) + (unit || '');
+        } else {
+            value = Math.round(min + percent * (max - min));
+            valDisplay.innerText = value + (unit || '');
+        }
+        return value;
+    }
+
+    function updateThumb(e) {
+        const rect = track.getBoundingClientRect();
+        let x = e.clientX - rect.left;
+        let percent = Math.min(Math.max(0, x / rect.width), 1);
+        thumb.style.left = (percent * 100) + '%';
+        return updateValue(percent);
+    }
+
+    function stopDrag() { isDragging = false; }
+
+    track.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        updateThumb(e);
+        if (onChange) onChange();
+    });
+    window.addEventListener('mousemove', (e) => {
+        if (isDragging) {
+            updateThumb(e);
+            if (onChange) onChange();
+        }
+    });
+    window.addEventListener('mouseup', stopDrag);
+    track.addEventListener('mouseleave', stopDrag);
+
+    const initialPercent = (initial - min) / (max - min);
+    thumb.style.left = (initialPercent * 100) + '%';
+    updateValue(initialPercent);
+
+    return {
+        getValue: () => {
+            let v = parseFloat(valDisplay.innerText);
+            if (unit) v = parseFloat(valDisplay.innerText.replace(unit, ''));
+            return v || initial;
+        }
+    };
+}
+
+const state = {
+    image: null,
+    width: 100,
+    color: '#C0C0C0',
+    ansiCode: '37',
+    charset: 'standard',
+    customCharset: '',
+    contrast: 1,
+    brightness: 0,
+    saturation: 100,
+    gamma: 1.0,
+    sharpen: 0,
+    invert: false,
+    edgeMode: false,
+    useANSI: false,
+    isProcessing: false,
+    livePreviewScheduled: false
+};
+
+const charsets = {
+    standard: ' .:-=+*#%@',
+    detailed: ' \'+`.,:;+*?%S#',
+    extended: '$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,"^`. ',
+    blocks: ' ░▒▓█',
+    braille: ' ⠄⢿⣧⢿⠃⣀⣤⠤⢤⠤',
+    binary: ' 01',
+    minimal: ' .:-',
+    custom: ''
+};
+
+const els = {
+    uploadZone: document.getElementById('uploadZone'),
+    fileInput: document.getElementById('fileInput'),
+    imagePreview: document.getElementById('imagePreview'),
+    previewImg: document.getElementById('previewImg'),
+    removeImage: document.getElementById('removeImage'),
+    charsetSelect: document.getElementById('charsetSelect'),
+    customCharsetInputEl: document.getElementById('customCharsetInputEl'),
+    customCharsetGroup: document.getElementById('customCharsetGroup'),
+    ansiToggleInput: document.getElementById('ansiToggleInput'),
+    asciiOutput: document.getElementById('asciiOutput'),
+    loading: document.getElementById('loading'),
+    loadingText: document.getElementById('loadingText'),
+    progressFill: document.getElementById('progressFill'),
+    progressPercent: document.getElementById('progressPercent'),
+    copyBtn: document.getElementById('copyBtn'),
+    downloadBtn: document.getElementById('downloadBtn'),
+    downloadPngBtn: document.getElementById('downloadPngBtn'),
+    copyImgBtn: document.getElementById('copyImgBtn'),
+    colorControlGroup: document.getElementById('colorControlGroup'),
+    colorPicker: document.getElementById('colorPicker'),
+    colorSwatches: document.querySelectorAll('.color-swatch'),
+    invertToggleInput: document.getElementById('invertToggleInput'),
+    edgeToggleInput: document.getElementById('edgeToggleInput')
+};
+
+const widthSlider = setupSlider('width-thumb', 'width-val', 'width-track', 40, 200, 100, '', 1, scheduleLivePreview);
+const contrastSlider = setupSlider('contrast-thumb', 'contrast-val', 'contrast-track', 0.5, 2, 1, 'x', 0.1, scheduleLivePreview);
+const brightnessSlider = setupSlider('brightness-thumb', 'brightness-val', 'brightness-track', -100, 100, 0, '', 1, scheduleLivePreview);
+const saturationSlider = setupSlider('saturation-thumb', 'saturation-val', 'saturation-track', 0, 200, 100, '%', 1, scheduleLivePreview);
+const gammaSlider = setupSlider('gamma-thumb', 'gamma-val', 'gamma-track', 0.5, 3.0, 1.0, 'x', 0.1, scheduleLivePreview);
+const sharpenSlider = setupSlider('sharpen-thumb', 'sharpen-val', 'sharpen-track', 0, 100, 0, '', 1, scheduleLivePreview);
+
+els.uploadZone.addEventListener('click', () => els.fileInput.click());
+
+els.uploadZone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    els.uploadZone.classList.add('dragover');
+});
+
+els.uploadZone.addEventListener('dragleave', () => {
+    els.uploadZone.classList.remove('dragover');
+});
+
+els.uploadZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    els.uploadZone.classList.remove('dragover');
+    const file = e.dataTransfer.files[0];
+    if (file && file.type.startsWith('image/')) handleFile(file);
+});
+
+els.fileInput.addEventListener('change', (e) => {
+    if (e.target.files[0]) handleFile(e.target.files[0]);
+});
+
+els.removeImage.addEventListener('click', removeImage);
+
+els.charsetSelect.addEventListener('change', (e) => {
+    state.charset = e.target.value;
+    els.customCharsetGroup.classList.toggle('hidden', state.charset !== 'custom');
+    scheduleLivePreview();
+});
+
+els.customCharsetInputEl.addEventListener('input', (e) => {
+    state.customCharset = e.target.value || ' .:-=+*#%@';
+    scheduleLivePreview();
+});
+
+els.customCharsetInputEl.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        els.customCharsetInputEl.blur();
+        scheduleLivePreview();
+    }
+});
+
+els.colorPicker.addEventListener('input', (e) => {
+    state.color = e.target.value;
+    updateColorSwatches();
+    updateOutputColor();
+    scheduleLivePreview();
+});
+
+els.colorSwatches.forEach(swatch => {
+    swatch.addEventListener('click', () => {
+        state.color = swatch.dataset.color;
+        state.ansiCode = swatch.dataset.ansi;
+        els.colorPicker.value = state.color;
+        updateColorSwatches();
+        updateOutputColor();
+        scheduleLivePreview();
+    });
+});
+
+els.ansiToggleInput.addEventListener('change', () => {
+    state.useANSI = els.ansiToggleInput.checked;
+    els.colorControlGroup.classList.toggle('hidden', !state.useANSI);
+    scheduleLivePreview();
+});
+
+els.invertToggleInput.addEventListener('change', () => {
+    state.invert = els.invertToggleInput.checked;
+    scheduleLivePreview();
+});
+
+els.edgeToggleInput.addEventListener('change', () => {
+    state.edgeMode = els.edgeToggleInput.checked;
+    scheduleLivePreview();
+});
+
+els.copyBtn.addEventListener('click', copyToClipboard);
+els.downloadBtn.addEventListener('click', downloadTXT);
+els.downloadPngBtn.addEventListener('click', downloadPNG);
+els.copyImgBtn.addEventListener('click', copyImageToClipboard);
+
+function scheduleLivePreview() {
+    if (!state.image) return;
+    if (state.livePreviewScheduled) return;
+    state.livePreviewScheduled = true;
+    requestAnimationFrame(() => {
+        state.livePreviewScheduled = false;
+        generateASCII();
+    });
+}
+
+widthSlider.getValue = () => {
+    state.width = parseInt(document.getElementById('width-val').innerText);
+    return state.width;
+};
+contrastSlider.getValue = () => {
+    state.contrast = parseFloat(document.getElementById('contrast-val').innerText.replace('x',''));
+    return state.contrast;
+};
+brightnessSlider.getValue = () => {
+    state.brightness = parseInt(document.getElementById('brightness-val').innerText);
+    return state.brightness;
+};
+saturationSlider.getValue = () => {
+    state.saturation = parseInt(document.getElementById('saturation-val').innerText.replace('%',''));
+    return state.saturation;
+};
+gammaSlider.getValue = () => {
+    state.gamma = parseFloat(document.getElementById('gamma-val').innerText.replace('x',''));
+    return state.gamma;
+};
+sharpenSlider.getValue = () => {
+    state.sharpen = parseInt(document.getElementById('sharpen-val').innerText);
+    return state.sharpen;
+};
+
+function handleFile(file) {
+    if (file.size > 10 * 1024 * 1024) {
+        alert('Arquivo muito grande. Máximo 10MB.');
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+             state.image = img;
+            els.previewImg.src = e.target.result;
+            els.imagePreview.classList.remove('hidden');
+            scheduleLivePreview();
+        };
+        img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+
+function removeImage() {
+    state.image = null;
+    els.fileInput.value = '';
+    els.imagePreview.classList.add('hidden');
+    els.asciiOutput.textContent = '';
+    els.copyBtn.disabled = true;
+    els.downloadBtn.disabled = true;
+    els.downloadPngBtn.disabled = true;
+    els.copyImgBtn.disabled = true;
+}
+
+function updateColorSwatches() {
+    els.colorSwatches.forEach(swatch => {
+        swatch.classList.toggle('active', swatch.dataset.color === state.color);
+    });
+}
+
+function updateOutputColor() {
+    els.asciiOutput.style.color = state.color;
+    els.asciiOutput.style.textShadow = `0 0 6px ${state.color}80`;
+    const textOut = document.getElementById('textOutput');
+    if (textOut) {
+        textOut.style.color = state.color;
+        textOut.style.textShadow = `0 0 6px ${state.color}80`;
+    }
+}
+
+function resizeImageToGrid(img, targetWidth) {
+    const aspectRatio = img.height / img.width;
+    const charAspectRatio = 0.55;
+    const height = Math.max(1, Math.floor(targetWidth * aspectRatio * charAspectRatio));
+    const sourceCanvas = document.createElement('canvas');
+    const sourceCtx = sourceCanvas.getContext('2d', { willReadFrequently: true });
+    sourceCanvas.width = targetWidth;
+    sourceCanvas.height = height;
+    sourceCtx.imageSmoothingEnabled = true;
+    sourceCtx.imageSmoothingQuality = 'high';
+    sourceCtx.drawImage(img, 0, 0, targetWidth, height);
+    return { canvas: sourceCanvas, ctx: sourceCtx, width: targetWidth, height: height };
+}
+
+function applySharpen(ctx, canvas, amount) {
+    if (amount <= 0) return;
+    const kernel = [
+        0, -amount, 0,
+        -amount, 1 + 4 * amount, -amount,
+        0, -amount, 0
+    ];
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const data = imageData.data;
+    const w = canvas.width;
+    const h = canvas.height;
+    const output = new Uint8ClampedArray(data.length);
+
+    for (let y = 0; y < h; y++) {
+        for (let x = 0; x < w; x++) {
+            const idx = (y * w + x) * 4;
+            let r = 0, g = 0, b = 0;
+            for (let ky = -1; ky <= 1; ky++) {
+                for (let kx = -1; kx <= 1; kx++) {
+                    const nx = Math.min(Math.max(x + kx, 0), w - 1);
+                    const ny = Math.min(Math.max(y + ky, 0), h - 1);
+                    const ni = (ny * w + nx) * 4;
+                    const k = kernel[(ky + 1) * 3 + (kx + 1)];
+                    r += data[ni] * k;
+                    g += data[ni + 1] * k;
+                    b += data[ni + 2] * k;
+                }
+            }
+            output[idx] = Math.min(255, Math.max(0, r));
+            output[idx + 1] = Math.min(255, Math.max(0, g));
+            output[idx + 2] = Math.min(255, Math.max(0, b));
+            output[idx + 3] = data[idx + 3];
+        }
+    }
+    imageData.data.set(output);
+    ctx.putImageData(imageData, 0, 0);
+}
+
+function applyBrightnessSaturation(ctx, canvas, brightness, saturation) {
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const data = imageData.data;
+    const sat = saturation / 100;
+    const bright = brightness / 100;
+
+    for (let i = 0; i < data.length; i += 4) {
+        data[i] = Math.min(255, Math.max(0, data[i] + brightness));
+        data[i + 1] = Math.min(255, Math.max(0, data[i + 1] + brightness));
+        data[i + 2] = Math.min(255, Math.max(0, data[i + 2] + brightness));
+        if (sat !== 1) {
+            const gray = 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
+            data[i] = Math.min(255, Math.max(0, gray + sat * (data[i] - gray)));
+            data[i + 1] = Math.min(255, Math.max(0, gray + sat * (data[i + 1] - gray)));
+            data[i + 2] = Math.min(255, Math.max(0, gray + sat * (data[i + 2] - gray)));
+        }
+    }
+    ctx.putImageData(imageData, 0, 0);
+}
+
+function getPixelLuminance(pixels, idx) {
+    const r = pixels[idx];
+    const g = pixels[idx + 1];
+    const b = pixels[idx + 2];
+    return (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+}
+
+function getSobelEdge(pixels, width, height, idx) {
+    const x = idx % width;
+    const y = Math.floor(idx / width);
+    let gx = 0, gy = 0;
+
+    const kernelX = [-1, 0, 1, -2, 0, 2, -1, 0, 1];
+    const kernelY = [-1, -2, -1, 0, 0, 0, 1, 2, 1];
+
+    for (let ky = -1; ky <= 1; ky++) {
+        for (let kx = -1; kx <= 1; kx++) {
+            const nx = Math.min(Math.max(x + kx, 0), width - 1);
+            const ny = Math.min(Math.max(y + ky, 0), height - 1);
+            const ni = (ny * width + nx);
+            const pIdx = ni * 4;
+            const lum = getPixelLuminance(pixels, pIdx);
+            const k = (ky + 1) * 3 + (kx + 1);
+            gx += lum * kernelX[k];
+            gy += lum * kernelY[k];
+        }
+    }
+    const mag = Math.sqrt(gx * gx + gy * gy);
+    return Math.min(1, Math.max(0, mag));
+}
+
+function getCurrentCharset() {
+    if (state.charset === 'custom') {
+        const custom = state.customCharset.trim();
+        return custom.length > 0 ? custom : ' .:-=+*#%@';
+    }
+    return charsets[state.charset];
+}
+
+function generateASCII() {
+    if (!state.image || state.isProcessing) return;
+
+    state.isProcessing = true;
+    els.loading.classList.remove('hidden');
+    els.progressFill.style.width = '0%';
+
+    setTimeout(() => {
+        try {
+            const ascii = convertImageToASCII();
+            els.asciiOutput.textContent = ascii.display;
+            els.copyBtn.disabled = false;
+            els.downloadBtn.disabled = false;
+            els.downloadPngBtn.disabled = false;
+            els.copyImgBtn.disabled = false;
+        } catch (error) {
+            console.error('Erro:', error);
+            alert('Erro ao gerar ASCII. Tente uma imagem menor.');
+        } finally {
+            els.loading.classList.add('hidden');
+            state.isProcessing = false;
+        }
+    }, 10);
+}
+
+function convertImageToASCII() {
+    const chars = getCurrentCharset();
+
+    const width = parseInt(document.getElementById('width-val').innerText);
+    const contrastVal = parseFloat(document.getElementById('contrast-val').innerText.replace('x', ''));
+    const brightnessVal = parseInt(document.getElementById('brightness-val').innerText);
+    const saturationVal = parseInt(document.getElementById('saturation-val').innerText.replace('%', ''));
+    const gammaVal = parseFloat(document.getElementById('gamma-val').innerText.replace('x', ''));
+    const sharpenVal = parseInt(document.getElementById('sharpen-val').innerText);
+
+    const { canvas, ctx, height } = resizeImageToGrid(state.image, width);
+
+    if (sharpenVal > 0) {
+        applySharpen(ctx, canvas, sharpenVal / 100);
+    }
+    applyBrightnessSaturation(ctx, canvas, brightnessVal, saturationVal);
+
+    const imageData = ctx.getImageData(0, 0, width, height);
+    const pixels = imageData.data;
+
+    let asciiText = '';
+    let ansiText = '';
+
+    const ESC = String.fromCharCode(27);
+    const ansiStart = state.useANSI ? `${ESC}[${state.ansiCode}m` : '';
+    const ansiReset = state.useANSI ? `${ESC}[0m` : '';
+
+    if (state.useANSI) {
+        ansiText += ansiStart;
+    }
+
+    const totalPixels = width * height;
+    const chunkSize = 1000;
+    let processed = 0;
+
+    for (let y = 0; y < height; y++) {
+        let lineText = '';
+        let lineANSI = '';
+
+        for (let x = 0; x < width; x++) {
+            const idx = (y * width + x) * 4;
+            let luminance;
+
+            if (state.edgeMode) {
+                const pixelIdx = (y * width + x);
+                luminance = getSobelEdge(pixels, width, height, pixelIdx);
+            } else {
+                luminance = getPixelLuminance(pixels, idx);
+                luminance = Math.pow(luminance, 1 / gammaVal);
+                luminance = luminance * contrastVal + (0.5 * (1 - contrastVal));
+                luminance = Math.min(1, Math.max(0, luminance));
+            }
+
+            let charIdx = Math.floor(luminance * (chars.length - 1));
+            if (state.invert) {
+                charIdx = (chars.length - 1) - charIdx;
+            }
+            charIdx = Math.min(chars.length - 1, Math.max(0, charIdx));
+            const char = chars[charIdx];
+
+            lineText += char;
+
+            if (state.useANSI) {
+                lineANSI += char;
+            }
+
+            processed++;
+            if (processed % chunkSize === 0) {
+                const percent = Math.min(100, Math.floor((processed / totalPixels) * 100));
+                els.progressFill.style.width = percent + '%';
+                els.progressPercent.innerText = percent + '%';
+            }
+        }
+
+        asciiText += lineText + '\n';
+        if (state.useANSI) {
+            ansiText += lineANSI + '\n';
+        }
+    }
+
+    els.progressFill.style.width = '100%';
+    els.progressPercent.innerText = '100%';
+
+    if (state.useANSI) {
+        ansiText += ansiReset;
+    }
+
+    return {
+        display: state.useANSI ? ansiText.replace(/\u001b\[\d+m/g, '') : asciiText,
+        raw: state.useANSI ? ansiText : asciiText,
+        width: width,
+        height: height,
+        chars: chars
+    };
+}
+
+function updateResponsiveFontSize() {
+    const vw = Math.max(320, window.innerWidth);
+    const fontSize = Math.max(6, Math.floor(vw / (state.width * 1.5)));
+    els.asciiOutput.style.fontSize = fontSize + 'px';
+}
+
+window.addEventListener('resize', updateResponsiveFontSize);
+
+async function copyToClipboard() {
+    if (!state.image) return;
+    const result = convertImageToASCII();
+    const originalHTML = els.copyBtn.innerHTML;
+
+    try {
+        if (navigator.clipboard && navigator.clipboard.write) {
+            const blob = new Blob([result.raw], { type: 'text/plain;charset=utf-8' });
+            const item = new ClipboardItem({ 'text/plain': blob });
+            await navigator.clipboard.write([item]);
+        } else if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(result.raw);
+        } else {
+            const textarea = document.createElement('textarea');
+            textarea.value = result.raw;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+        }
+
+        els.copyBtn.innerHTML = '<span class="material-symbols-outlined text-sm">check</span> Copiado!';
+        setTimeout(() => {
+            els.copyBtn.innerHTML = originalHTML;
+        }, 2000);
+    } catch (err) {
+        console.error('Erro ao copiar:', err);
+        els.copyBtn.innerHTML = '<span class="material-symbols-outlined text-sm">close</span> Erro';
+        setTimeout(() => {
+            els.copyBtn.innerHTML = originalHTML;
+        }, 2000);
+    }
+}
+
+function downloadTXT() {
+    if (!state.image) return;
+    const result = convertImageToASCII();
+    const blob = new Blob([result.raw], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `yks-ascii-${Date.now()}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+async function drawASCIICanvas(text, fgColor, bgColor) {
+    await document.fonts.ready;
+    const fontSize = 16;
+    const pad = 12;
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const font = `${fontSize}px "JetBrains Mono", monospace`;
+    ctx.font = font;
+    ctx.textBaseline = 'top';
+    ctx.textAlign = 'left';
+
+    const lineHeight = Math.ceil(fontSize * 1.2);
+    const lines = (text || '').split('\n');
+    let maxW = 0;
+    for (const line of lines) {
+        maxW = Math.max(maxW, ctx.measureText(line).width);
+    }
+    const contentW = Math.max(maxW, 1);
+    const contentH = Math.max(lines.length * lineHeight, 1);
+
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = Math.ceil((contentW + pad * 2) * dpr);
+    canvas.height = Math.ceil((contentH + pad * 2) * dpr);
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.font = font;
+    ctx.textBaseline = 'top';
+    ctx.textAlign = 'left';
+
+    ctx.fillStyle = bgColor || '#0a0c0e';
+    ctx.fillRect(0, 0, contentW + pad * 2, contentH + pad * 2);
+    ctx.fillStyle = fgColor || state.color || '#92fa84';
+
+    for (let i = 0; i < lines.length; i++) {
+        ctx.fillText(lines[i], pad, pad + i * lineHeight);
+    }
+    return canvas;
+}
+
+function downloadCanvasPNG(canvas, filename) {
+    return new Promise((resolve, reject) => {
+        canvas.toBlob((blob) => {
+            if (!blob) { reject(new Error('Falha ao gerar PNG')); return; }
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = url;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+            resolve();
+        }, 'image/png');
+    });
+}
+
+async function downloadPNG() {
+    if (!state.image) return;
+    const result = convertImageToASCII();
+    try {
+        const canvas = await drawASCIICanvas(result.display, state.color, '#0a0c0e');
+        await downloadCanvasPNG(canvas, `yks-ascii-${Date.now()}.png`);
+    } catch (err) {
+        console.error('Erro ao gerar PNG:', err);
+        alert('Erro ao gerar PNG.');
+    }
+}
+
+async function copyImageToClipboard() {
+    if (!state.image) return;
+    const result = convertImageToASCII();
+    const btn = els.copyImgBtn;
+    const originalHTML = btn.innerHTML;
+    try {
+        const canvas = await drawASCIICanvas(result.display, state.color, '#0a0c0e');
+        const blob = await new Promise((res) => canvas.toBlob(res, 'image/png'));
+        if (navigator.clipboard && window.ClipboardItem) {
+            await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+        } else {
+            throw new Error('Clipboard image não suportado');
+        }
+        btn.innerHTML = '<span class="material-symbols-outlined text-sm">check</span> Copiado!';
+        setTimeout(() => { btn.innerHTML = originalHTML; }, 2000);
+    } catch (err) {
+        console.error('Erro ao copiar imagem:', err);
+        btn.innerHTML = '<span class="material-symbols-outlined text-sm">close</span> Erro';
+        setTimeout(() => { btn.innerHTML = originalHTML; }, 2000);
+    }
+}
+
+function initLivePreview() {
+    state.livePreviewScheduled = false;
+}
+
+function createSparkles() {
+    const container = document.querySelector('main');
+    const sparkleCount = 16;
+    for (let i = 0; i < sparkleCount; i++) {
+        const s = document.createElement('div');
+        s.className = 'sparkle';
+        const size = 2 + Math.random() * 3;
+        s.style.width = size + 'px';
+        s.style.height = size + 'px';
+        s.style.left = (10 + Math.random() * 80) + 'vw';
+        s.style.top = (10 + Math.random() * 80) + 'vh';
+        s.style.animationDelay = (Math.random() * 3) + 's';
+        s.style.animationDuration = (1.5 + Math.random() * 1.5) + 's';
+        const color = Math.random() > 0.5 ? 'var(--glow-magenta)' : 'var(--glow-cyan)';
+        s.style.background = color;
+        s.style.boxShadow = '0 0 6px ' + color;
+        container.appendChild(s);
+    }
+}
+
+els.colorControlGroup.classList.add('hidden');
+updateOutputColor();
+updateResponsiveFontSize();
+createSparkles();
+
+/* ===================== MODO TEXTO → ASCII (figlet) ===================== */
+const TEXT_FONTS = [
+    { name: 'Standard', file: 'Standard.flf', h: 8 },
+    { name: 'Slant', file: 'Slant.flf', h: 8 },
+    { name: 'Banner', file: 'Banner.flf', h: 7 },
+    { name: 'Big', file: 'Big.flf', h: 8 },
+    { name: 'Block', file: 'Block.flf', h: 7 },
+    { name: '3D-ASCII', file: '3D-ASCII.flf', h: 8 },
+    { name: '3D Diagonal', file: '3D Diagonal.flf', h: 16 },
+    { name: 'AMC Razor2', file: 'AMC Razor2.flf', h: 9 },
+    { name: 'Babyface Leet', file: 'Babyface Leet.flf', h: 5 },
+    { name: 'Big Money-sw', file: 'Big Money-sw.flf', h: 12 },
+    { name: 'Bloody', file: 'Bloody.flf', h: 10 },
+    { name: 'BlurVision ASCII', file: 'BlurVision ASCII.flf', h: 9 },
+    { name: 'Bulbhead', file: 'Bulbhead.flf', h: 4 },
+    { name: 'Caligraphy', file: 'Caligraphy.flf', h: 21 },
+    { name: 'Caligraphy2', file: 'Caligraphy2.flf', h: 20 },
+    { name: 'Classy', file: 'Classy.flf', h: 9 },
+    { name: 'Crazy', file: 'Crazy.flf', h: 13 },
+    { name: 'DOS Rebel', file: 'DOS Rebel.flf', h: 11 },
+    { name: 'Dot Matrix', file: 'Dot Matrix.flf', h: 10 },
+    { name: 'Fender', file: 'Fender.flf', h: 7 },
+    { name: 'Fraktur', file: 'Fraktur.flf', h: 15 },
+    { name: 'Pawp', file: 'Pawp.flf', h: 9 },
+    { name: 'Poison', file: 'Poison.flf', h: 12 },
+    { name: 'Rebel', file: 'Rebel.flf', h: 11 },
+    { name: 'S Blood', file: 'S Blood.flf', h: 6 },
+    { name: 'Small Keyboard', file: 'Small Keyboard.flf', h: 4 },
+    { name: 'Stellar', file: 'Stellar.flf', h: 8 },
+    { name: 'Tiles', file: 'Tiles.flf', h: 8 },
+    { name: 'Twisted', file: 'Twisted.flf', h: 8 },
+    { name: 'Graffiti', file: 'Graffiti.flf', h: 6 },
+    { name: 'Sub-Zero', file: 'Sub-Zero.flf', h: 6 },
+    { name: 'Script', file: 'Script.flf', h: 7 },
+    { name: 'Shadow', file: 'Shadow.flf', h: 5 },
+    { name: 'Speed', file: 'Speed.flf', h: 6 },
+    { name: 'Varsity', file: 'Varsity.flf', h: 7 }
+];
+
+let appMode = 'image';
+let textFontsReady = false;
+let textDebounce = null;
+let currentTextASCII = '';
+const textInput = document.getElementById('textInput');
+const fontSelect = document.getElementById('fontSelect');
+const textOutput = document.getElementById('textOutput');
+
+const MODE_BTN_CLASS = 'aero-btn text-sm py-1.5 px-5 rounded-none border-0';
+
+function setMode(m) {
+    appMode = m;
+    const isImage = m === 'image';
+    document.getElementById('imageHero').classList.toggle('hidden', !isImage);
+    document.getElementById('imageControls').classList.toggle('hidden', !isImage);
+    document.getElementById('imageResult').classList.toggle('hidden', !isImage);
+    document.getElementById('textSection').classList.toggle('hidden', isImage);
+    document.getElementById('modeImageBtn').className = MODE_BTN_CLASS + (isImage ? ' aero-btn-primary' : ' aero-btn-secondary');
+    document.getElementById('modeTextBtn').className = MODE_BTN_CLASS + (isImage ? ' aero-btn-secondary' : ' aero-btn-primary');
+    if (!isImage) renderText();
+}
+
+document.getElementById('modeImageBtn').addEventListener('click', () => setMode('image'));
+document.getElementById('modeTextBtn').addEventListener('click', () => setMode('text'));
+
+function initTextFonts() {
+    document.getElementById('textLoading').classList.remove('hidden');
+    const fig = window.__figlet;
+    if (!fig) return;
+    for (const f of TEXT_FONTS) {
+        try {
+            const data = window.__FLF && window.__FLF[f.name];
+            if (data) fig.parseFont(f.name, data);
+        } catch (e) { console.error('Falha ao carregar fonte:', f.name, e); }
+    }
+    fontSelect.innerHTML = '';
+    for (const f of TEXT_FONTS) {
+        const o = document.createElement('option');
+        o.value = f.name;
+        o.textContent = f.name;
+        fontSelect.appendChild(o);
+    }
+    textFontsReady = true;
+    document.getElementById('textLoading').classList.add('hidden');
+    renderText();
+}
+
+function scheduleTextRender() {
+    clearTimeout(textDebounce);
+    textDebounce = setTimeout(renderText, 280);
+}
+
+function applyTextFontSize(fontName) {
+    const f = TEXT_FONTS.find(x => x.name === fontName);
+    const h = f ? f.h : 8;
+    const px = Math.min(15, Math.max(8, Math.round(79 / h)));
+    textOutput.style.fontSize = px + 'px';
+}
+
+function setTextButtons(enabled) {
+    ['textCopyBtn', 'textDownloadTxtBtn', 'textDownloadPngBtn', 'textCopyImgBtn'].forEach(id => {
+        document.getElementById(id).disabled = !enabled;
+    });
+}
+
+function renderText() {
+    if (appMode !== 'text' || !textFontsReady) return;
+    const txt = textInput.value;
+    const font = fontSelect.value;
+    if (!txt.trim()) {
+        textOutput.textContent = '';
+        currentTextASCII = '';
+        setTextButtons(false);
+        return;
+    }
+    const fig = window.__figlet;
+    fig.text(txt, { font: font }, (err, out) => {
+        if (err) {
+            textOutput.textContent = 'Erro ao renderizar.';
+            return;
+        }
+        currentTextASCII = out;
+        textOutput.textContent = out;
+        applyTextFontSize(font);
+        setTextButtons(true);
+    });
+}
+
+function flashBtn(id) {
+    const b = document.getElementById(id);
+    const orig = b.innerHTML;
+    b.innerHTML = '<span class="material-symbols-outlined text-sm">check</span> Copiado!';
+    setTimeout(() => { b.innerHTML = orig; }, 2000);
+}
+
+async function copyTextText() {
+    if (!currentTextASCII) return;
+    try {
+        await navigator.clipboard.writeText(currentTextASCII);
+        flashBtn('textCopyBtn');
+    } catch (e) {
+        console.error(e);
+        alert('Erro ao copiar texto.');
+    }
+}
+
+function downloadTextTxt() {
+    if (!currentTextASCII) return;
+    const blob = new Blob([currentTextASCII], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `yks-text-ascii-${Date.now()}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+async function downloadTextPng() {
+    if (!currentTextASCII) return;
+    try {
+        const canvas = await drawASCIICanvas(currentTextASCII, state.color, '#0a0c0e');
+        await downloadCanvasPNG(canvas, `yks-text-ascii-${Date.now()}.png`);
+    } catch (e) {
+        console.error(e);
+        alert('Erro ao gerar PNG.');
+    }
+}
+
+async function copyTextImg() {
+    if (!currentTextASCII) return;
+    const btn = document.getElementById('textCopyImgBtn');
+    const orig = btn.innerHTML;
+    try {
+        const canvas = await drawASCIICanvas(currentTextASCII, state.color, '#0a0c0e');
+        const blob = await new Promise((res) => canvas.toBlob(res, 'image/png'));
+        if (navigator.clipboard && window.ClipboardItem) {
+            await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+            btn.innerHTML = '<span class="material-symbols-outlined text-sm">check</span> Copiado!';
+            setTimeout(() => { btn.innerHTML = orig; }, 2000);
+        } else {
+            throw new Error('Clipboard image não suportado');
+        }
+    } catch (e) {
+        console.error(e);
+        btn.innerHTML = '<span class="material-symbols-outlined text-sm">close</span> Erro';
+        setTimeout(() => { btn.innerHTML = orig; }, 2000);
+    }
+}
+
+textInput.addEventListener('input', scheduleTextRender);
+fontSelect.addEventListener('change', renderText);
+document.getElementById('textCopyBtn').addEventListener('click', copyTextText);
+document.getElementById('textDownloadTxtBtn').addEventListener('click', downloadTextTxt);
+document.getElementById('textDownloadPngBtn').addEventListener('click', downloadTextPng);
+document.getElementById('textCopyImgBtn').addEventListener('click', copyTextImg);
+
+/* Carrega a lib figlet (vendorizada) e as fontes .flf */
+if (window.figlet) {
+    window.__figlet = window.figlet;
+    initTextFonts();
+} else {
+    console.error('figlet não disponível');
+    document.getElementById('textLoading').classList.add('hidden');
+    fontSelect.innerHTML = '<option>erro ao carregar fontes</option>';
+}
+</script>
+</body>
+</html>
