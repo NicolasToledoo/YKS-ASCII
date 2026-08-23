@@ -602,6 +602,15 @@
             </div>
         </div>
 
+        <div class="flex items-center gap-3">
+            <span class="font-mono text-xs text-muted tracking-wider">CORES ANSI</span>
+            <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="ansiToggleInput" class="sr-only peer">
+                <div class="w-11 h-6 bg-glass-surface rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-near-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gradient-to-r peer-checked:from-magenta peer-checked:to-electric-blue"></div>
+            </label>
+        </div>
+        </div>
+
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-stack-md pt-4">
             <div id="colorControlGroup" class="space-y-base hidden">
                 <span class="text-xs font-mono text-muted tracking-wider">PALETA DE TINTA</span>
@@ -615,14 +624,6 @@
                 </div>
             </div>
 
-            <div class="flex items-center gap-3">
-                <span class="font-mono text-xs text-muted tracking-wider">CORES ANSI</span>
-                <label class="relative inline-flex items-center cursor-pointer">
-                    <input type="checkbox" id="ansiToggleInput" class="sr-only peer">
-                    <div class="w-11 h-6 bg-glass-surface rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-near-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gradient-to-r peer-checked:from-magenta peer-checked:to-electric-blue"></div>
-                </label>
-            </div>
-        </div>
     </aside>
 
     <section class="grid grid-cols-1 gap-stack-md" id="imageResult">
