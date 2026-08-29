@@ -1,6 +1,6 @@
 # YKS ASCII
 
-> https://nicolastoledoo.github.io/YKS-ASCII/
+> https://yks777.github.io/YKS-ASCII/
 
 Transforme imagens **ou texto** em arte ASCII. Modo Imagem com suporte a cores ANSI para terminal, e Modo Texto com dezenas de fontes figlet. Geração 100% no navegador, sem upload de dados.
 
